@@ -22,6 +22,9 @@ body {
   color: var(--gt-text);
   font-family: var(--ff-body);
   line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 button, a {
   font: inherit;
@@ -35,15 +38,24 @@ button, a {
   border:0.5px solid var(--gt-border);
   max-width: 1320px;
   margin: 24px auto;
+  margin-top: 88px;
 }
 .gt-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   display:flex;
   align-items:center;
   padding:0 32px;
   height:64px;
   background:rgba(7,9,15,0.95);
+  backdrop-filter: blur(8px);
   border-bottom:0.5px solid var(--gt-border);
   gap:32px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .gt-logo{
   display:flex;
@@ -62,18 +74,19 @@ button, a {
   flex-shrink:0;
 }
 .logo-mark svg{width:18px;height:18px;}
-.logo-name{font-family:var(--ff-head);font-size:19px;font-weight:800;color:var(--gt-text);letter-spacing:-0.5px;}
+.logo-name{font-family:var(--ff-head);font-size:19px;font-weight:800;color:var(--gt-text);letter-spacing:-0.2px;}
 .logo-name span{color:var(--gt-cyan);}
 .gt-nav-links{display:flex;gap:4px;margin-left:16px;}
 .nav-link{padding:6px 14px;font-size:13px;font-weight:500;color:var(--gt-muted);border-radius:20px;cursor:pointer;border:none;background:transparent;transition:color 0.15s,background 0.15s;}
 .nav-link:hover{color:var(--gt-text);background:rgba(255,255,255,0.06);}
 .nav-link.active{color:var(--gt-text);background:rgba(30,127,255,0.15);}
 .gt-nav-right{margin-left:auto;display:flex;gap:10px;align-items:center;}
+.admin-tag{font-size:13px;font-weight:600;color:var(--gt-text);padding:8px 12px;border-radius:18px;background:rgba(255,255,255,0.06);}
 .btn-outline{padding:7px 18px;font-family:var(--ff-body);font-size:13px;font-weight:500;color:var(--gt-text);background:transparent;border:0.5px solid rgba(255,255,255,0.2);border-radius:20px;cursor:pointer;transition:border-color 0.15s,background 0.15s;}
 .btn-outline:hover{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);}
 .btn-primary{padding:7px 20px;font-family:var(--ff-body);font-size:13px;font-weight:600;color:#fff;background:var(--gt-blue);border:none;border-radius:20px;cursor:pointer;transition:background 0.15s;}
 .btn-primary:hover{background:var(--gt-blue-dim);}
-.gt-hero{padding:72px 48px 64px;display:flex;flex-direction:column;align-items:flex-start;position:relative;overflow:hidden;}
+.gt-hero{padding:72px 48px 64px;display:flex;flex-direction:column;align-items:flex-start;position:relative;overflow:hidden;margin-top: -24px;}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(30,127,255,0.12);border:0.5px solid rgba(30,127,255,0.3);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;color:#6ab4ff;letter-spacing:0.5px;margin-bottom:24px;}
 .badge-dot{width:6px;height:6px;background:var(--gt-cyan);border-radius:50%;}
 .hero-h1{font-family:var(--ff-head);font-size:52px;font-weight:800;line-height:1.1;letter-spacing:-1.5px;color:var(--gt-text);max-width:580px;margin-bottom:20px;}
@@ -381,9 +394,13 @@ button, a {
   margin-left: 280px;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .adm-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -392,12 +409,18 @@ button, a {
   background: var(--gt-bg);
 }
 
+.adm-body {
+  padding: 24px 32px;
+  flex: 1;
+  overflow-y: auto;
+}
+
 .topbar-title {
   font-family: var(--ff-head);
   font-size: 24px;
   font-weight: 800;
   color: var(--gt-text);
-  letter-spacing: -0.5px;
+  letter-spacing: -0.2px;
 }
 
 .topbar-date {

@@ -253,22 +253,26 @@ export function App() {
             Guajira<span>Tech</span>
           </span>
         </a>
-        <div className="gt-nav-links">
-          <button className="nav-link active" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Inicio</button>
-          <button className="nav-link" onClick={() => scrollToSection('.gt-section')}>Servicios</button>
-          <button className="nav-link" onClick={() => scrollToSection('.gt-section-dark')}>Productos</button>
-          <button className="nav-link" onClick={() => scrollToSection('.offer-card')}>Contacto</button>
-        </div>
+        {!isAdmin && (
+          <div className="gt-nav-links">
+            <button className="nav-link active" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Inicio</button>
+            <button className="nav-link" onClick={() => scrollToSection('.gt-section')}>Servicios</button>
+            <button className="nav-link" onClick={() => scrollToSection('.gt-section-dark')}>Productos</button>
+            <button className="nav-link" onClick={() => scrollToSection('.offer-card')}>Contacto</button>
+          </div>
+        )}
         <div className="gt-nav-right">
           {isAdmin ? (
             <>
-              <span style={{ color: 'white', marginRight: '10px' }}>Admin</span>
+              <span className="admin-tag">Administrador</span>
               <button className="btn-outline" onClick={logout}>Cerrar sesión</button>
             </>
           ) : (
-            <button className="btn-outline" onClick={() => setShowLogin(true)}>Iniciar sesión</button>
+            <>
+              <button className="btn-outline" onClick={() => setShowLogin(true)}>Iniciar sesión</button>
+              <button className="btn-primary" onClick={() => scrollToSection('.offer-card')}>Cotizar ahora</button>
+            </>
           )}
-          <button className="btn-primary" onClick={() => scrollToSection('.offer-card')}>Cotizar ahora</button>
         </div>
       </nav>
 
