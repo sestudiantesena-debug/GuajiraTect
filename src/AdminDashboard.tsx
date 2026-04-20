@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, lazy, Suspense } from 'react'
 import { supabase } from './lib/supabaseClient'
-import { Bar, Doughnut } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -21,6 +20,9 @@ ChartJS.register(
   Legend,
   ArcElement
 )
+
+const Bar = lazy(() => import('react-chartjs-2').then(module => ({ default: module.Bar })))
+const Doughnut = lazy(() => import('react-chartjs-2').then(module => ({ default: module.Doughnut })))
 
 interface Product {
   id: string
@@ -378,7 +380,9 @@ function AdminDashboard() {
                 </span>
               </div>
               <div style={{ position: 'relative', width: '100%', height: '200px' }}>
-                <Bar data={revenueData} options={chartOptions} />
+                <Suspense fallback={<div>Cargando gráfico...</div>}>
+                  <Bar data={revenueData} options={chartOptions} />
+                </Suspense>
               </div>
             </div>
 
@@ -390,7 +394,9 @@ function AdminDashboard() {
               </div>
               <div className="donut-body">
                 <div className="donut-canvas-wrap">
-                  <Doughnut data={donutData} options={donutOptions} />
+                  <Suspense fallback={<div>Cargando gráfico...</div>}>
+                    <Doughnut data={donutData} options={donutOptions} />
+                  </Suspense>
                 </div>
                 <div className="donut-legend">
                   <div className="leg-item">
